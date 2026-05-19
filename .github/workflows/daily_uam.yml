@@ -1,27 +1,25 @@
-    1 name: Daily UAM News Summarizer
-    2 on:
-    3 on:
-    4   schedule:
-    5     - cron: '0 23 * * *'
-    6   workflow_dispatch:
-    7 jobs:
-    8 jobs:
-    9   build:
-   10     runs-on: ubuntu-latest
-   11     steps:
-   12       - name: Checkout repository
-   13         uses: actions/checkout@v4
-   14       - name: Set up Node.js
-   15         uses: actions/setup-node@v4
-   16         with:
-   17           node-version: '20'
-   18       - name: Install dependencies
-   19         run: npm install
-   20       - name: Run News Summarizer
-   21         env:
-   22           GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
-   23           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-   24           EMAIL_USER: ${{ secrets.EMAIL_USER }}
-   25           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-   26           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-   27         run: node index.js
+name: Daily UAM News Summarizer
+on:
+  schedule:
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Run News Summarizer
+        env:
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: node index.js
