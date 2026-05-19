@@ -1,5 +1,5 @@
     1 name: Daily UAM News Summarizer
-    2
+    2 on:
     3 on:
     4   schedule:
     5     - cron: '0 23 * * *'
