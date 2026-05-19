@@ -1,0 +1,33 @@
+name: Daily UAM News Summarizer
+
+on:
+  schedule:
+    # 매일 아침 8시 (한국 시간 기준 KST = UTC+9)
+    # UTC 23:00 = 한국 시간 08:00
+    - cron: '0 23 * * *'
+  workflow_dispatch: # 수동 실행 버튼 추가
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run News Summarizer
+        env:
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: node index.js
