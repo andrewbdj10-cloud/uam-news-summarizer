@@ -4,7 +4,7 @@
     4   schedule:
     5     - cron: '0 23 * * *'
     6   workflow_dispatch:
-    7
+    7 jobs:
     8 jobs:
     9   build:
    10     runs-on: ubuntu-latest
